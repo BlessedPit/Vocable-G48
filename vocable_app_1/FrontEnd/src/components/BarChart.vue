@@ -88,7 +88,7 @@ export default {
 <style scoped>
 .chart-container {
   margin-top: 50px;
-  width: 700px; /* Larghezza del grafico */
+  width: 650px; /* Larghezza del grafico */
   height: 400px; /* Altezza del grafico */
 }
 </style>

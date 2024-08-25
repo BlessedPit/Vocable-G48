@@ -1,10 +1,8 @@
 <template>
-  <!--stylesheet-->
-
   <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
   </head>
-
+<div class="wrapper">
   <nav class="border-blue-700 bg-blue-accent-1 dark:bg-gray-800 dark:border-gray-700">
     <!--logo con scritta di fianco-->
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
@@ -35,7 +33,7 @@
           </li>
           <li>
             <router-link to="/gameplay"
-              class="block py-2 px-3 md:p-0 text-gray-900 dark:text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Gioca</router-link>
+              class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Gioca</router-link>
           </li>
           <li>
             <router-link to="/about"
@@ -61,8 +59,7 @@
       </div>
     </div>
   </nav>
-
-
+</div>
 </template>
 
 <script setup>
@@ -70,6 +67,7 @@ import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { initFlowbite } from 'flowbite'
+
 
 // Inizializza store e router
 const store = useStore()
@@ -92,4 +90,10 @@ onMounted(() => {
 
 </script>
 
-<!---->
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.wrapper{
+  font-family: 'Roboto', sans-serif;
+}
+</style>

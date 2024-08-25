@@ -11,6 +11,7 @@
         :won5="user.won5 !== undefined ? user.won5 : 0" :won6="user.won6 !== undefined ? user.won6 : 0" />
     </div>
     <div class="statistics-container">
+      <p class="statistic-title">Statistiche partite:</p>
       <v-sheet class="statistics-wrapper">
         <v-card class="stat-card" rounded>
           <p class="stat-title">Partite giocate:</p>
@@ -81,7 +82,8 @@ export default {
 
 
 .chart-section {
-  margin: 10px auto;
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 .chart-title {
@@ -91,8 +93,14 @@ export default {
 }
 
 
+.statistic-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #364ae3;
+}
+
 .statistics-container {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 
