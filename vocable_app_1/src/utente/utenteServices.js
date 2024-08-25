@@ -8,7 +8,7 @@ module.exports.createUtenteDBService = (utenteDetails) => {
     return new Promise(function myFN(resolve, reject) {
         utenteModel.findOne({ email: utenteDetails.email }, function (error, existingUser) {
             if (error) {
-                reject({ status: false, msg: "Errore durante la verifica dell'email" });
+                reject({ status: false, msg: "Errore durante la verifica dell'email" + error });
             } else if (existingUser) {
                 reject({ status: false, msg: "Email già in uso" });
             } else {
