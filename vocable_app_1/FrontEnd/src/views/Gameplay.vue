@@ -18,15 +18,23 @@ const state = reactive({
 });
 
 // Computed per verificare se il gioco è stato vinto o perso
-const wonGame = computed(() =>
+let wonGame = computed(() =>
   state.guesses[state.currentGuessIndex - 1] === state.solution.word
 );
 
-const lostGame = computed(() => !wonGame.value && state.currentGuessIndex >= 6);
+let lostGame = computed(() => !wonGame.value && state.currentGuessIndex >= 6);
 
 // Funzione per ricaricare la pagina e iniziare un nuovo gioco
 const refreshPage = () => {
-  window.location.reload(); // Ricarica la pagina corrente
+  state.solution = getRandomWord();
+  state.guesses = ["","","","","",""];
+  state.currentGuessIndex = 0;
+  state.guessedLetters.miss = [];
+  state.guessedLetters.found = [];
+  state.guessedLetters.hint = [];
+  state.statsSaved = false;
+  computed();
+  //window.location.reload(); // Ricarica la pagina corrente
 };
 
 // Funzione per gestire l'input da tastiera
