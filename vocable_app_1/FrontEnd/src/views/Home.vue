@@ -8,7 +8,7 @@
         <div class="descrizione">
             <span class="desc">Cerca di indovinare tutte le parole tramite le loro definizioni!</span>
         </div>
-        <a href="Gameplay" class="button">Let's Play!</a>
+        <a href="/Gameplay" class="button">Let's Play!</a>
     </div>
  </template>
   

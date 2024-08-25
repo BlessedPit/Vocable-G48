@@ -85,16 +85,19 @@ export default {
         if (!response.data.status) {
           alert(response.data.message)
         } else {
+          console.log("rerouting to userstats"),
           this.$router.replace({ name: 'userstats' });
         }
 
-
       } catch (error) {
         console.error('Errore durante il login:', error);
-        alert('Errore durante il login');
+        alert('Errore durante il login',error);
       } finally {
         this.loading = false;
+        setTimeout(()=>
+        this.$router.replace({ name: 'userstats' }),500)
       }
+      
     }
 
   }
