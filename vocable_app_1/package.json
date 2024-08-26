@@ -16,8 +16,6 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
-    "flowbite": "^2.5.1",
-    "flowbite-vue": "^0.1.6",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^6.10.0",
     "punycode": "^2.3.1",
