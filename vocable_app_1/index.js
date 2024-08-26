@@ -19,7 +19,7 @@ app.get('*', (req, res) => {
 });
 
 // Avvia il server backend
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9992;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
@@ -30,16 +30,6 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     allowedHeaders: ['Content-Type', 'Authorization'] 
 }));;
-
-
-app.listen(9992, function check(err)
-{
-    if(err){
-        console.log("Errore connessione al server");
-    }else{
-        console.log("Server in ascolto sulla porta 9992");
-    }
-})
 
 async function run() {
     try {
