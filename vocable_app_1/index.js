@@ -19,10 +19,10 @@ app.get('*', (req, res) => {
 });
 
 // Avvia il server backend
-const PORT = process.env.PORT || 9992;
+/*const PORT = process.env.PORT || 9992;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-});
+});*/
 
 
 app.use(cors({
