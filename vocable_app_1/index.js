@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const app = express()
 const mongoose = require('mongoose');
 mongoose.set('strictQuery',false);
@@ -8,6 +9,21 @@ require('dotenv').config()
 
 const uri = "mongodb+srv://admin:trentaelode@vocable.zykpck7.mongodb.net/?retryWrites=true&w=majority&appName=Vocable";
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+// Serve i file statici dal frontend build
+app.use(express.static(path.join(__dirname, 'FrontEnd', 'dist')));
+
+// Catch-all route per servire index.html per tutte le richieste non gestite
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'FrontEnd', 'dist', 'index.html'));
+});
+
+// Avvia il server backend
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
 
 app.use(cors({
     origin: 'http://localhost:5173', 
