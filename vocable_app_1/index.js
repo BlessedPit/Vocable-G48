@@ -1,14 +1,26 @@
-const express = require('express')
-const path = require('path')
-const app = express()
+const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
-mongoose.set('strictQuery',false);
-var routes = require('./route/routes')
-const cors = require('cors')
-require('dotenv').config()
+const cors = require('cors');
+const routes = require('./route/routes');
+require('dotenv').config(); // Carica le variabili d'ambiente dal file .env
 
-const uri = "mongodb+srv://admin:trentaelode@vocable.zykpck7.mongodb.net/?retryWrites=true&w=majority&appName=Vocable";
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+const app = express(); 
+
+// Configurazioni Mongoose
+mongoose.set('strictQuery', false); // Per evitare warning
+
+// Estrai le variabili d'ambiente
+const uri = process.env.MONGO_URI; // MongoDB URI
+const PORT = process.env.PORT || 9992; // Porta del server
+const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173'; // URL del client
+
+// Configurazione CORS per permettere richieste dal frontend
+app.use(cors({
+    origin: clientUrl,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Serve i file statici dal frontend build
 app.use(express.static(path.join(__dirname, 'FrontEnd', 'dist')));
@@ -18,55 +30,32 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'FrontEnd', 'dist', 'index.html'));
 });
 
-// Avvia il server backend
-/*const PORT = process.env.PORT || 9992;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});*/
-
-
-app.use(cors({
-    origin: 'http://localhost:5173', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-    allowedHeaders: ['Content-Type', 'Authorization'] 
-}));;
-
-
-app.listen(9992, function check(err)
-{
-    if(err){
-        console.log("Errore connessione al server");
-    }else{
-        console.log("Server in ascolto sulla porta 9992");
+// Inizializza il server
+app.listen(PORT, (err) => {
+    if (err) {
+        console.log("Errore connessione al server:", err);
+    } else {
+        console.log(`Server in ascolto sulla porta ${PORT}`);
     }
-})
+});
 
+// Funzione per connettersi a MongoDB con Mongoose
 async function run() {
     try {
-      // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
-      await mongoose.connect(uri, clientOptions);
-      await mongoose.connection.db.admin().command({ ping: 1 });
-      console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    } finally {
-      // Ensures that the client will close when you finish/error
-      //await mongoose.disconnect();
-      //console.log("Database disconnesso")
+        await mongoose.connect(uri, {
+            serverApi: {
+                version: '1',
+                strict: true,
+                deprecationErrors: true
+            }
+        });
+        console.log("Connesso a MongoDB!");
+    } catch (error) {
+        console.error("Errore di connessione a MongoDB:", error);
     }
-  }
-  run().catch(console.dir);
+}
+run().catch(console.dir);
 
-
-/*mongoose.connect("mongodb://localhost:27017/utenti", //NB: "utenti" è il nome del db, senza niente crea il db di "test"
-    {
-        useNewUrlParser:true,
-        useUnifiedTopology: true
-    }).then(
-        async()=> {
-            console.log("MongoDB Connection -- Ready state is:", mongoose.connection.readyState);
-        },
-        (err) => {
-            console.log(err, ": database utenti non connesso")
-        }
-    );*/
-    app.use(express.json());
-    app.use(routes);
+// Middleware per la gestione delle rotte
+app.use(express.json());
+app.use(routes);
