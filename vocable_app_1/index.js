@@ -31,6 +31,16 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'] 
 }));;
 
+
+app.listen(9992, function check(err)
+{
+    if(err){
+        console.log("Errore connessione al server");
+    }else{
+        console.log("Server in ascolto sulla porta 9992");
+    }
+})
+
 async function run() {
     try {
       // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
