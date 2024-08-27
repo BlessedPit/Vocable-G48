@@ -27,7 +27,7 @@ export default {
 
     actions: {
         async signIn({ dispatch }, credentials) {
-            let response = await axios.post('/api/utente/login', credentials)
+            let response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/login', credentials)
             dispatch('attempt',response.data.token)
             return response;
         },
@@ -40,7 +40,7 @@ export default {
                 return;
             }
             try {
-                let response = await axios.get('/api/utente/me')/*,{
+                let response = await axios.get('https://vocable-g48-production-a10a.up.railway.app/api/utente/me')/*,{
                     headers:{
                         'Authorization':'Bearer ' + token
                     }
@@ -62,7 +62,7 @@ export default {
 
         async signOut({ commit }) {
             try {
-                await axios.post('/api/utente/logout');
+                await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/logout');
             } catch (error) {
                 console.error('Logout failed:', error);
             }

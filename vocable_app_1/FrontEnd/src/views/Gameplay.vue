@@ -90,7 +90,7 @@ const handleInput = (key) => {
 const updateUserStats = async (won, attempts) => {
   try {
     console.log(`Updating stats: won=${won}, attempts=${attempts}`);
-    await axios.post('/api/utente/update-stats', { won, attempts });
+    await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/update-stats', { won, attempts });
     console.log('Statistiche aggiornate con successo');
   } catch (error) {
     console.error('Errore durante l\'aggiornamento delle statistiche:', error);

@@ -24,7 +24,7 @@ export default {
         async register({ commit }, credentials) {
             try {
                 // Effettua la chiamata al server per la registrazione dell'utente
-                let response = await axios.post('/api/utente/create', credentials);
+                let response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/create', credentials);
                 
                 // Gestisci la risposta del server
                 if (response.data.status) {

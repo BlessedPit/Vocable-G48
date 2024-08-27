@@ -3,7 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./route/routes');
-require('dotenv').config(); // Carica le variabili d'ambiente dal file .env
+require('dotenv').config();
 
 const app = express();
 
@@ -12,25 +12,8 @@ mongoose.set('strictQuery', false); // Per evitare warning
 
 
 const axios = require('axios');
-/*
-axios.get('https://ifconfig.me')
-  .then(response => {
-    console.log('IP Pubblico di Railway:', response.data);
-  })
-  .catch(error => {
-    console.error('Errore nel recupero dell\'IP:', error);
-  });
-*/
 
-//HTTPS "forzato", funziona solo con railway
-app.use((req, res, next) => {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-        return res.redirect('https://' + req.headers.host + req.url);
-    }
-    next();
-});
-
-// Estrai le variabili d'ambiente
+// Variabili d'ambiente
 const uri = process.env.MONGO_URI; // MongoDB URI
 const PORT = process.env.PORT || 9992; // Porta del server
 const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173'; // URL del client

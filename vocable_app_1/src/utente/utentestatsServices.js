@@ -48,7 +48,7 @@ module.exports.findStatsByEmail = (email) => {
 }
 
 
-// src/utente/utentestatsController.js
+
 module.exports.updateUtentestatsControllerFn = async (req, res) => {
     const { won, attempts } = req.body;
     try {

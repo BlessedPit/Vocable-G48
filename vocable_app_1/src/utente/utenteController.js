@@ -1,6 +1,6 @@
 const { response } = require("express");
 var utenteService = require("./utenteServices");
-const authenticateToken = require('./authenticateToken'); // Importa il middleware
+//const authenticateToken = require('./authenticateToken');
 
 var createUtenteControllerFn = async (req, res) => {
     try {
@@ -17,7 +17,6 @@ var createUtenteControllerFn = async (req, res) => {
     } catch(err) {
         console.log(err);
         res.send({"status":false,"message":err.msg});
-        //res.send({ "status": false, "message": "Errore: Impossibile completare la richiesta" });
     }
 }
 
@@ -50,7 +49,7 @@ var meUtenteControllerFn = async (req, res) => {
             return res.status(404).json({ msg: 'Utente non trovato' });
         }
 
-        // Restituisci i dettagli dell'utente
+        // Restituiscie i dettagli dell'utente
         res.json({
             email: user.email,
             nickname: user.nickname,
@@ -62,12 +61,8 @@ var meUtenteControllerFn = async (req, res) => {
 }
 
 var logoutUtenteControllerFn = async (req, res) => {
+        // Restituisce messaggi di successo o di fallimento
     try {
-        // Se hai bisogno di eseguire logiche specifiche per il logout, falle qui
-        // Ad esempio, invalidare il token nel database (se usi un sistema di blacklist)
-
-        // Per il logout lato client, il token di sessione può essere eliminato semplicemente
-        // Non è necessario fare nulla sul server se utilizzi solo JWT
         res.status(200).send({
             status: true,
             message: "Logout avvenuto con successo"

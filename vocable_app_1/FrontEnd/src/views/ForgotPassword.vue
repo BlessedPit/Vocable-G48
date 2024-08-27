@@ -35,7 +35,7 @@ export default {
             const { valid } = await this.$refs.form.validate();
             if (valid) {
                 try {
-                    await axios.post('api/utente/forgot-password', { email: this.email });
+                    await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
                     alert('Link di reset inviato, controlla la tua email');
                 } catch (error) {
                     alert('Errore nell\'invio del link di reset');

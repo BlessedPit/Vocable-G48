@@ -1,7 +1,7 @@
 var utentestatsServices = require("./utentestatsServices");
 var utenteService = require("./utenteServices");
 
-var createUtentestatsControllerFn = async (req, res) => //request, response
+var createUtentestatsControllerFn = async (req, res) => 
 {
     try
     {
@@ -19,7 +19,7 @@ var createUtentestatsControllerFn = async (req, res) => //request, response
     }
     catch(err)
     {
-        console.log(err); //logga in caso di errore
+        console.log(err);
     }
 }
 

@@ -2,6 +2,7 @@ const utenteModel = require('./utenteModel');
 const utentestatsModel = require('./utentestatsModel');
 const jwt = require('jsonwebtoken');
 const encryptor = require('simple-encryptor')('hqBzkw4H7Iog6561'); // chiave per criptare le password
+require('dotenv').config();
 
 // Funzione per la creazione di un nuovo utente
 module.exports.createUtenteDBService = (utenteDetails) => {
@@ -36,26 +37,26 @@ module.exports.loginUtenteDBService = (utenteDetails) => {
     return new Promise(function myFn(resolve, reject) {
         utenteModel.findOne({ email: utenteDetails.email }, function getresult(errorvalue, result) {
             if (errorvalue) {
-                reject({ status: false, msg: "Errore durante il login" ,token : '0',id: '0'});
+                reject({ status: false, msg: "Errore durante il login", token: '0', id: '0' });
             } else {
                 if (result) {
                     const decryptedPassword = encryptor.decrypt(result.password);
                     if (decryptedPassword === utenteDetails.password) {
                         const payload = { email: result.email, id: result._id };
                         const options = { expiresIn: '6h' };
-                        const token = jwt.sign(payload, 'balls' /*process.env.JWT_SECRET*/, options);
-                        const body = { 
-                            status: true, 
-                            msg: "Utente validato con successo", 
-                            token: token, 
-                            id: result._id 
+                        const token = jwt.sign(payload, process.env.JWT_SECRET, options);
+                        const body = {
+                            status: true,
+                            msg: "Utente validato con successo",
+                            token: token,
+                            id: result._id
                         };
                         resolve(body);
                     } else {
-                        reject({ status: false, msg: "Password e/o email errati" ,token : '0',id: '0'});
+                        reject({ status: false, msg: "Password e/o email errati", token: '0', id: '0' });
                     }
                 } else {
-                    reject({ status: false, msg: "Dati non validi" ,token : '0',id: '0'});
+                    reject({ status: false, msg: "Dati non validi", token: '0', id: '0' });
                 }
             }
         });

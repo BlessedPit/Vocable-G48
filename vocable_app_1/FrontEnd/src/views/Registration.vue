@@ -84,7 +84,7 @@ export default {
         });
 
         if (response.data.status) {
-          await axios.post('/api/utente/createstats', {
+          await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/createstats', {
             email: this.email,
             gameswon: 0,
             gameslost: 0,
