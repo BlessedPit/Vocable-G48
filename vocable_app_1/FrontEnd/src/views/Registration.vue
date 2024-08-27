@@ -15,16 +15,9 @@
         </v-form>
 
         <!-- Alert per l'errore -->
-        <v-alert v-if="currentEmailError" type="error" dismissible class="custom-alert">
+        <v-alert v-if="currentEmailError" type="error" dismissible style="text-align: center; text-indent: -20px;">
           {{ currentEmailError }}
         </v-alert>
-        <style>
-        .custom-alert {
-          text-align: center;
-          position: relative;
-          transform: translateX(-20px);
-          }
-          </style>
 
         <v-btn :disabled="!isFormValid" @click.native="onRegistrati" color="blue" size="large" variant="elevated" block>
           Registrati
