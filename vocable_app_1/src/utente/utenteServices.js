@@ -111,7 +111,7 @@ module.exports.sendEmailFn = (templateparams) =>{
     return new Promise(function myFN(resolve, reject){
     const serviceID = 'default_service';
     const templateID = 'template_o30m3uc';
-    emailjs.sendForm(serviceID, templateID, templateparams)
+    emailjs.send(serviceID, templateID, templateparams)
           .then(() => {
             console.log('Email mandata!');
             resolve({"status":true,"message":"Mail mandata con successo"})
