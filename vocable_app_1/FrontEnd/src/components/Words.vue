@@ -15,7 +15,6 @@ export const words = [
   { word: "spiaggia", definition: "Una riva sabbiosa o ghiaiosa, specialmente vicino all'oceano." },
   { word: "sorriso", definition: "Un'espressione soddisfatta, gentile o divertita, tipicamente con gli angoli della bocca sollevati." },
   { word: "luce", definition: "L'agente naturale che stimola la vista e rende le cose visibili." },
-  { word: "fiamma", definition: "La parte visibile e gassosa di un incendio." },
   { word: "pietra", definition: "Un piccolo pezzo di roccia." },
   { word: "acqua", definition: "Un liquido chiaro, incolore, inodore e insapore, essenziale per la maggior parte della vita vegetale e animale." },
   { word: "sette", definition: "Il numero 7." },

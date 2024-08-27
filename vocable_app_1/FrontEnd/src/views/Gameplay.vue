@@ -166,7 +166,7 @@ onMounted(() => {
 
       <!-- Bottone per ricaricare la pagina e iniziare un nuovo gioco -->
       <div class="button-wrapper">
-        <v-btn rounded="xl" size="x-large" elevation="8" v-ripple color="blue" class="refresh-button"
+        <v-btn rounded="xl" size="x-large" elevation="8" v-ripple color="#5865f2" class="refresh-button"
           v-if="state.gameFinished" @click="refreshPage">
           Prossima parola
         </v-btn>
@@ -197,9 +197,12 @@ onMounted(() => {
 
 /* Bottone per ricaricare la pagina */
 .button-wrapper {
+  position: fixed;        
+  bottom: 20px;         
+  right: 20px;            
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: flex-end;
+  margin-top: 20px;       
 }
 
 .refresh-button {
