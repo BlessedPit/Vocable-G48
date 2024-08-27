@@ -3,7 +3,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
   </head>
   <div class="wrapper">
-    <nav class="border-blue-900 bg-blue-900 dark:bg-gray-800 dark:border-gray-700">
+    <nav class="border-blue-custom bg-blue-custom dark:bg-gray-800 dark:border-gray-700">
       <!--logo con scritta di fianco-->
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
         <router-link to="/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -28,7 +28,7 @@
             class="flex flex-col font-medium mt-2 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
             <li>
               <router-link to="/"
-                class="block py-2 px-3 md:p-0 text-white bg-blue-900 rounded md:bg-transparent md:hover:text-blue-300 dark:text-white dark:hover:text-blue-300 md:dark:hover:text-blue-300 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                class="block py-2 px-3 md:p-0 text-white bg-blue-custom rounded md:bg-transparent md:hover:text-blue-300 dark:text-white dark:hover:text-blue-300 md:dark:hover:text-blue-300 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                 aria-current="page">Home</router-link>
             </li>
             <li>
@@ -97,9 +97,17 @@ onMounted(() => {
   font-family: 'Roboto', sans-serif;
 }
 
-/* Colore navbar più scuro */
-.navbar {
-  background-color: #1a202c; /* Blu più scuro */
+/* Definizione del colore blu personalizzato */
+.bg-blue-custom {
+  background-color: hsl(242, 100%, 50%);
+}
+
+.border-blue-custom {
+  border-color: hsl(242, 100%, 50%);
+}
+
+.text-white {
+  color: white;
 }
 
 </style>
