@@ -10,6 +10,18 @@ const app = express();
 // Configurazioni Mongoose
 mongoose.set('strictQuery', false); // Per evitare warning
 
+
+const axios = require('axios');
+
+axios.get('https://ifconfig.me')
+  .then(response => {
+    console.log('IP Pubblico di Railway:', response.data);
+  })
+  .catch(error => {
+    console.error('Errore nel recupero dell\'IP:', error);
+  });
+
+  
 // Estrai le variabili d'ambiente
 const uri = process.env.MONGO_URI; // MongoDB URI
 const PORT = process.env.PORT || 9992; // Porta del server
