@@ -7,7 +7,7 @@ var createUtenteControllerFn = async (req, res) => {
         console.log("\nregistration");
         console.log(req.body);
         var status = await utenteService.createUtenteDBService(req.body);
-        console.log(status);
+        console.log("Status dal servizio:", status);
 
         if (status && status.status === true) {
             res.send({ "status": true, "message": "Utente creato con successo" });

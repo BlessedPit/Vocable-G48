@@ -7,9 +7,16 @@ require('dotenv').config();
 
 const app = express();
 
+// Middleware per forzare HTTPS
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect('https://' + req.headers.host + req.url);
+  }
+  next();
+});
+
 // Configurazioni Mongoose
 mongoose.set('strictQuery', false); // Per evitare warning
-
 
 const axios = require('axios');
 
@@ -27,6 +34,10 @@ app.use(cors({
 
 // Serve i file statici dal frontend build
 app.use(express.static(path.join(__dirname, 'FrontEnd', 'dist')));
+
+// Middleware per la gestione delle rotte
+app.use(express.json());
+app.use(routes);
 
 // Catch-all route per servire index.html per tutte le richieste non gestite
 app.get('*', (req, res) => {
@@ -58,7 +69,3 @@ async function run() {
     }
 }
 run().catch(console.dir);
-
-// Middleware per la gestione delle rotte
-app.use(express.json());
-app.use(routes);
