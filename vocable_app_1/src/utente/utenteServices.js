@@ -3,6 +3,7 @@ const utentestatsModel = require('./utentestatsModel');
 const jwt = require('jsonwebtoken');
 const encryptor = require('simple-encryptor')('hqBzkw4H7Iog6561'); // chiave per criptare le password
 require('dotenv').config();
+const emailjs = require('emailjs-com');
 
 // Funzione per la creazione di un nuovo utente
 module.exports.createUtenteDBService = (utenteDetails) => {
@@ -110,14 +111,14 @@ module.exports.sendEmailFn = (templateparams) =>{
     return new Promise(function myFN(resolve, reject){
     const serviceID = 'default_service';
     const templateID = 'template_o30m3uc';
-    emailjs.send(serviceID, templateID, templateParams)
+    emailjs.sendForm(serviceID, templateID, templateparams)
           .then(() => {
             console.log('Email mandata!');
             resolve({"status":true,"message":"Mail mandata con successo"})
           })
           .catch((err) => {
             console.error('Errore:', err);
-            reject({"status":false,"message":err})
+            reject({"status":false,"message":"error "+err})
           });
         });
 }
