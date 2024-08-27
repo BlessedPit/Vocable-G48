@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'FrontEnd', 'dist')));
 
 // Middleware per la gestione delle rotte
 app.use(express.json());
-app.use(routes);
+app.use('/api', routes);
 
 // Catch-all route per servire index.html per tutte le richieste non gestite
 app.get('*', (req, res) => {
