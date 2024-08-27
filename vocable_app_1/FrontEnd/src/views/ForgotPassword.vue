@@ -35,10 +35,12 @@ export default {
             const { valid } = await this.$refs.form.validate();
             if (valid) {
                 try {
-                    await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
-                    alert('Link di reset inviato, controlla la tua email');
+                    response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
+                    console.log(response);
+                    alert('Password reinviata, controlla la tua mail');
                 } catch (error) {
-                    alert('Errore nell\'invio del link di reset');
+                    console.log(error)
+                    alert('Errore nell\'invio della password: ',error);
                 }
             }
         },

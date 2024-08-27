@@ -106,3 +106,18 @@ module.exports.logoutUtente = (req, res) => {
     });
 };
 
+module.exports.sendEmailFn = (templateparams) =>{
+    return new Promise(function myFN(resolve, reject){
+    const serviceID = 'default_service';
+    const templateID = 'template_o30m3uc';
+    emailjs.send(serviceID, templateID, templateParams)
+          .then(() => {
+            console.log('Email mandata!');
+            resolve({"status":true,"message":"Mail mandata con successo"})
+          })
+          .catch((err) => {
+            console.error('Errore:', err);
+            reject({"status":false,"message":err})
+          });
+        });
+}

@@ -40,6 +40,26 @@ var loginUtenteControllerFn = async (req, res) => {
     }
 }
 
+var forgotPasswordControllerFn = async (req,res) => {
+    try {
+        const templateParams = {
+            to_email: req.email,
+            message: 'pallw',
+          };
+          result = await(utenteService.sendEmailFn(templateParams));
+          if(result.status){
+            console.log("true");
+            res.send({"status":true,"message":result.message});
+          } else {
+            console.log("false");
+            res.send({"status":false,"message":result.message});
+          }     
+    } catch (error){
+        console.log(error);
+        res.status(500).json({msg: error});
+    }
+}
+
 var meUtenteControllerFn = async (req, res) => {
     try {
         // Trova l'utente nel database utilizzando l'email memorizzata nel token
@@ -77,4 +97,4 @@ var logoutUtenteControllerFn = async (req, res) => {
 }
 
 
-module.exports = { createUtenteControllerFn, loginUtenteControllerFn, meUtenteControllerFn, logoutUtenteControllerFn  };
+module.exports = { createUtenteControllerFn, loginUtenteControllerFn, meUtenteControllerFn, logoutUtenteControllerFn,forgotPasswordControllerFn  };
