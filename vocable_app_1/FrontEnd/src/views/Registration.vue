@@ -22,7 +22,7 @@
         .custom-alert {
           text-align: center;
           position: relative;
-          left: -20px;
+          transform: translateX(-20px);
           }
           </style>
 
