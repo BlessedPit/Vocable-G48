@@ -15,7 +15,7 @@
         </v-form>
 
         <!-- Alert per l'errore -->
-        <v-alert v-if="currentEmailError" type="error" dismissible style="text-align: center; text-indent: -20px;">
+        <v-alert v-if="currentEmailError" type="error" dismissible style="text-align: center; text-indent: -70px;">
           {{ currentEmailError }}
         </v-alert>
 
