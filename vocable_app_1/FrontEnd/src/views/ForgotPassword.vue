@@ -34,16 +34,31 @@ export default {
         async sendResetLink() {
             const { valid } = await this.$refs.form.validate();
             if (valid) {
-                try {
-                    response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
-                    console.log(response);
-                    alert('Password reinviata, controlla la tua mail');
-                } catch (error) {
-                    console.log(error)
-                    alert('Errore nell\'invio della password: ',error);
-                }
+                try{
+                const serviceID = 'default_service';
+                const templateID = 'template_o30m3uc';
+                emailjs.init("LxMUIwv2KBoQWjQDz");
+
+                const templateparams = {
+                   to_email: req.email,
+                   message: 'pallw',
+              };
+
+                emailjs.send(serviceID, templateID, templateparams)
+          .then(() => {
+            console.log('Email mandata!');
+            resolve({"status":true,"message":"Mail mandata con successo"})
+          })
+          .catch((err) => {
+            console.error('Errore:', err);
+            reject({"status":false,"message":"error "+err})
+          });
+            }catch(error){
+                console.log(error)
+                alert('error')
             }
-        },
+        }
+    }
     },
 }
 </script>
