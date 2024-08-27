@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted, computed } from 'vue';
+import { ref, reactive, onMounted, computed, nextTick } from 'vue';
 import axios from 'axios';
 import SimpleKeyboard from '../components/SimpleKeyboard.vue';
 import WordRow from '../components/WordRow.vue';
@@ -28,7 +28,7 @@ const lostGame = computed(() => !wonGame.value && state.currentGuessIndex >= 6);
 
 const keyboardReset = ref(false);
 
-const refreshPage = () => {
+const refreshPage = async () => {
   state.solution = getRandomWord(); // Genera una nuova parola casuale
   state.guesses = ["", "", "", "", "", ""]; // Resetta le ipotesi
   state.currentGuessIndex = 0; // Resetta l'indice delle ipotesi
@@ -36,9 +36,10 @@ const refreshPage = () => {
   state.statsSaved = false; // Imposta il salvataggio delle statistiche su false
   state.gameFinished = false; // Imposta lo stato del gioco come non finito
   keyboardReset.value = true; // Imposta il flag per resettare la tastiera
+  await nextTick();
   setTimeout(() => {
     keyboardReset.value = false; // Reimposta il flag per evitare che si resetti continuamente
-  }, 0); 
+  }, 0);
 };
 
 // Funzione per gestire l'input da tastiera
@@ -118,66 +119,71 @@ onMounted(() => {
                     ? ""
                     : e.code == "AltRight"
                       ? ""
-                      : e.key;
+                      : e.code == "AltLeft"
+                        ? ""
+                        : e.key;
     handleInput(key);
   });
 });
 </script>
 
 <template>
-  <v-sheet class="content-wrapper">
-    <div class="wrapperwords">
-      <div>
-        <!-- Mostra le righe delle parole -->
-        <word-row v-for="(guess, i) in state.guesses" :key="i + state.solution.word" :value="guess"
-          :solution="state.solution.word" :submitted="i < state.currentGuessIndex" />
-      </div>
+  <v-responsive>
+    <v-sheet class="content-wrapper">
+      <div class="wrapperwords">
+        <div>
+          <word-row v-for="(guess, i) in state.guesses" :key="i + state.solution.word" :value="guess"
+            :solution="state.solution.word" :submitted="i < state.currentGuessIndex" class="word-row" />
+        </div>
 
-      <!-- Messaggio di vittoria o sconfitta -->
-      <template v-if="wonGame && state.gameFinished" class="text-center">
-        <p class="win-message">
-          Congratulazioni! Hai trovato la soluzione!
-        </p>
-      </template>
-
-      <template v-else-if="lostGame && state.gameFinished" class="lose-wrapper">
-        <p class="lose-message-warn">
-          Peccato, hai perso!
-        </p>
-        <span class="lose-message">
-          <p class="lose-message-word">La parola era: </p>
-          <p class="lose-message-solution"> {{ state.solution.word }}</p>
-        </span>
-      </template>
-
-      <!-- Definizione della parola -->
-      <div class="definition-container">
-        <span>
-          <p class="definition-title">Definizione:</p>
-          <p class="definition-text">
-            {{ state.solution.definition }}
+        <template v-if="wonGame && state.gameFinished" class="text-center">
+          <p class="win-message">
+            Congratulazioni! Hai trovato la soluzione!
           </p>
-        </span>
-      </div>
+        </template>
 
-      <!-- Componente della tastiera -->
-      <simple-keyboard @onKeyPress="handleInput" :guessedLetters="state.guessedLetters"
-        :resetKeyboard="keyboardReset" />
+        <template v-else-if="lostGame && state.gameFinished" class="lose-wrapper">
+          <p class="lose-message-warn">
+            Peccato, hai perso!
+          </p>
+          <span class="lose-message">
+            <p class="lose-message-word">La parola era: </p>
+            <p class="lose-message-solution">{{ state.solution.word }}</p>
+          </span>
+        </template>
 
-      <!-- Bottone per ricaricare la pagina e iniziare un nuovo gioco -->
-      <div class="button-wrapper">
-        <v-btn rounded="xl" size="x-large" elevation="8" v-ripple color="#5865f2" class="refresh-button"
-          v-if="state.gameFinished" @click="refreshPage">
-          Prossima parola
-        </v-btn>
+        <div class="definition-container">
+          <span>
+            <p class="definition-title">Definizione:</p>
+            <p class="definition-text cutive-regular mt-2">
+              {{ state.solution.definition }}
+            </p>
+          </span>
+        </div>
+
+        <simple-keyboard @onKeyPress="handleInput" :guessedLetters="state.guessedLetters"
+          :resetKeyboard="keyboardReset" />
+
+        <div class="button-wrapper">
+          <v-btn rounded="xl" size="x-large" elevation="8" v-ripple color="#5865f2" class="refresh-button"
+            v-if="state.gameFinished" @click="refreshPage">
+            Prossima parola
+          </v-btn>
+        </div>
       </div>
-    </div>
-  </v-sheet>
+    </v-sheet>
+  </v-responsive>
 </template>
 
+
 <style scoped>
-/* Importa Google Fonts (esempio con "Roboto") */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cutive&display=swap');
+
+.cutive-regular {
+  font-family: "Cutive", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 .content-wrapper {
   margin-top: 20px;
@@ -188,22 +194,24 @@ onMounted(() => {
   justify-content: space-between;
   overflow-y: auto;
   font-family: 'Roboto', sans-serif;
-  /* Applica il font importato */
 }
 
 .wrapperwords {
   flex: 1;
+  width: 100%;
+  padding: 0 10px;
 }
 
-/* Bottone per ricaricare la pagina */
+
 .button-wrapper {
-  position: fixed;        
-  bottom: 20px;         
-  right: 20px;            
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;       
+  margin-top: 20px;
 }
+
 
 .refresh-button {
   display: flex;
@@ -211,47 +219,36 @@ onMounted(() => {
   justify-content: center;
 }
 
-/* Stile per il messaggio di vittoria */
+
 .win-message {
   font-size: 1.5rem;
   font-weight: 700;
   color: #28a745;
-  /* Verde per la vittoria */
   text-align: center;
-  /* Centro del testo */
 }
 
-/* Stile per il messaggio di sconfitta */
+
 .lose-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Centra orizzontalmente */
   justify-content: center;
-  /* Centra verticalmente */
   margin: 40px 0;
-  /* Spazio superiore e inferiore */
 }
 
 .lose-message-warn {
   font-size: 1.5rem;
   font-weight: 700;
   color: #dc3545;
-  /* Rosso per la sconfitta */
   margin-bottom: 10px;
-  /* Spazio sotto il messaggio di sconfitta */
   text-align: center;
-  /* Centro del testo */
 }
 
 .lose-message {
   display: flex;
   flex-direction: column;
-  /* Disporre i paragrafi in colonna */
   align-items: center;
-  /* Centra orizzontalmente */
   gap: 10px;
-  /* Spazio tra i paragrafi */
 }
 
 .lose-message-word,
@@ -264,23 +261,44 @@ onMounted(() => {
   color: #dc3545;
 }
 
-/* Stile per la definizione */
+
 .definition-container {
   text-align: center;
   margin: 20px 0;
 }
 
 .definition-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #007bff;
-  /* Blu per il titolo della definizione */
 }
 
 .definition-text {
   font-size: 1.125rem;
   font-weight: 400;
   color: #212529;
-  /* Nero per il testo della definizione */
+}
+
+
+@media (max-width: 600px) {
+  .wrapperwords {
+    padding: 0 5px;
+  }
+
+  .refresh-button {
+    width: 80%;
+  }
+
+  .win-message,
+  .lose-message-warn,
+  .definition-title {
+    font-size: 1.25rem;
+  }
+
+  .lose-message-word,
+  .lose-message-solution,
+  .definition-text {
+    font-size: 1rem;
+  }
 }
 </style>

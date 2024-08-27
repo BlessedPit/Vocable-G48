@@ -1,170 +1,157 @@
 <template>
-    <div v-if="isVisible" class="rules-overlay">
-      <div class="rules-modal">
-        <!-- Pulsante di chiusura -->
-        <button @click="closeRules" class="close-button">X</button>
-        <p class="text-h4 font-bold mb-4">How to play!</p>
-        <p class="mb-6">
-          Hai <span class="font-bold text-red-600 ml-2 mr-2">6</span> tentativi per indovinare la parola in base alla definizione
-        </p>
-        <div class="text-left mb-6">
-        <p class="font-semibold">Raccomandazioni:</p>
-        <ul class="indented-list">
-            <li>
-                <p>Prima di poter confermare la tua "guess", tutte le caselle devono contenere una lettera!</p>
-            </li>
-            <li>
-                <p>Le caselle ti aiutano a capire come stai andando!</p>
-            </li>
-            </ul>
-        </div>
-        <p class="text-left font-semibold mb-4">Spiegazione caselle:</p>
-        <div class="color-explanation">
-          <div class="color-box green"></div>
-          <div class="color-description">
-            <span class="font-bold green-text">Casella verde</span>
-            <p>La lettera è corretta e nella posizione giusta.</p>
-          </div>
-        </div>
-        <div class="color-explanation">
-          <div class="color-box yellow"></div>
-          <div class="color-description">
-            <span class="font-bold yellow-text">Casella gialla</span>
-            <p>La lettera è corretta ma nella posizione sbagliata.</p>
-          </div>
-        </div>
-        <div class="color-explanation">
-          <div class="color-box gray"></div>
-          <div class="color-description">
-            <span class="font-bold gray-text">Casella grigia</span>
-            <p>La lettera non è presente nella parola.</p>
-          </div>
-        </div>
-        <p class="font-semibold mt-10 mb-4 text-blue-600">Buona fortuna!</p>
+  <div v-if="isVisible" class="rules-overlay">
+    <div class="rules-modal">
+      <!-- Pulsante di chiusura -->
+      <button @click="closeRules" class="close-button">X</button>
+      <p class="text-h4 font-bold mb-4 text-center">How to play!</p>
+      <div class="mb-6 text-center">
+        Hai <span class="font-bold text-blue-600 ml-2 mr-2 text-lg">6</span> tentativi per indovinare la parola in base alla definizione
       </div>
+      <div class="text-left mb-4">
+        <p class="font-semibold text-blue-600">Spiegazione caselle:</p>
+        <p>Le caselle ti aiutano a capire se stai indovinando, in base al colore:</p>
+      </div>
+      <div class="color-explanation">
+        <div class="color-box bg-green"></div>
+        <div class="color-description">
+          <span class="font-bold green-text">Casella verde</span>
+          <p>La lettera è corretta e nella posizione giusta.</p>
+        </div>
+      </div>
+      <div class="color-explanation">
+        <div class="color-box bg-yellow"></div>
+        <div class="color-description">
+          <span class="font-bold yellow-text">Casella gialla</span>
+          <p>La lettera è corretta ma nella posizione sbagliata.</p>
+        </div>
+      </div>
+      <div class="color-explanation">
+        <div class="color-box bg-grey"></div>
+        <div class="color-description">
+          <span class="font-bold gray-text">Casella grigia</span>
+          <p>La lettera non è presente nella parola.</p>
+        </div>
+      </div>
+      <p class="font-semibold mt-10 mb-4 text-blue-500 text-center">Buona fortuna!</p>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        isVisible: false
-      };
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isVisible: false
+    };
+  },
+  methods: {
+    openRules() {
+      this.isVisible = true;
     },
-    methods: {
-      openRules() {
-        this.isVisible = true;
-      },
-      closeRules() {
-        this.isVisible = false;
-      }
+    closeRules() {
+      this.isVisible = false;
     }
-  };
-  </script>
-  
-  <style scoped>
-
-.indented-list {
-  margin-left: 30px; 
-  padding-left: 20px;
-  margin-right: 30px; 
-  padding-right: 20px;
-  list-style-position: inside; 
-}
-
-.indented-list li {
-  margin-bottom: 8px; /* Spazio tra gli elementi della lista */
-}
-
-.indented-list p {
-  margin: 0; /* Rimuove margini extra dal paragrafo */
-}
-  .rules-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  
+};
+</script>
+
+<style scoped>
+.rules-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.rules-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px; /* Dimensione massima su desktop */
+  max-height: 80vh; /* Limita l'altezza su desktop */
+  width: 100%;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Aggiungi scroll verticale se necessario */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.color-explanation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.color-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solid rgb(74, 74, 74);
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+.color-description {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  max-width: calc(100% - 66px);
+}
+
+.color-description span {
+  font-weight: bold;
+}
+
+.green-text {
+  color: #4caf50;
+}
+
+.yellow-text {
+  color: #efc000;
+}
+
+.gray-text {
+  color: #9e9e9e;
+}
+
+/* Stili responsivi per migliorare l'esperienza su schermi piccoli */
+@media (max-width: 600px) {
   .rules-modal {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 100%;
-    position: relative;
+    padding: 16px;
+    max-width: 100%;
+    max-height: 80vh;
   }
-  
+
   .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: transparent;
-    font-size: 18px;
-    cursor: pointer;
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
   }
-  
-  .color-explanation {
-    display: flex;
-    align-items: flex-start; 
-    margin-bottom: 16px;
-  }
-  
+
   .color-box {
-    width: 50px;
-    height: 50px; 
-    border-radius: 5px;
-    border: 2px solid rgb(74, 74, 74); 
-    margin-right: 16px;
+    width: 40px;
+    height: 40px;
   }
-  
-  .color-box.green {
-    background-color: #4caf50; /* Verde */
+
+  .color-explanation {
+    margin-bottom: 12px;
   }
-  
-  .color-box.yellow {
-    background-color: #ffeb3b; /* Giallo */
-  }
-  
-  .color-box.gray {
-    background-color: #9e9e9e; /* Grigio */
-  }
-  
-  .color-description {
-    display: flex;
-    flex-direction: column; /* Disposizione verticale del testo */
-    justify-content: center;
-  }
-  
-  .color-description span {
-    font-weight: bold;
-  }
-  
-  .color-description p {
-    margin: 0; 
-  }
-  
-  .green-text {
-    color: #4caf50;
-    text-align: left;
-  }
-  
-  .yellow-text {
-    color: #efc000;
-    text-align: left;
-  }
-  
-  .gray-text {
-    color: #9e9e9e; 
-    text-align: left;
-  }
-  
-  </style>
-  
+}
+</style>
