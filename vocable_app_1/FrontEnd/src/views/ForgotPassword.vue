@@ -46,14 +46,6 @@ export default {
               };
 
                 emailjs.send(serviceID, templateID, templateparams)
-          .then(() => {
-            console.log('Email mandata!');
-            resolve({"status":true,"message":"Mail mandata con successo"})
-          })
-          .catch((err) => {
-            console.error('Errore:', err);
-            reject({"status":false,"message":"error "+err})
-          });
             }catch(error){
                 console.log(error)
                 alert('error')
