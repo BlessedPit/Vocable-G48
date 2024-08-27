@@ -12,6 +12,6 @@ router.route('/utente/me').get(authenticateToken, utenteController.meUtenteContr
 router.route('/utente/logout').post(authenticateToken, utenteController.logoutUtenteControllerFn);
 router.route('/utente/get-stats').get(authenticateToken, utentestatsController.statGetterControllerFn);
 router.route('/utente/update-stats').post(authenticateToken, utentestatsController.updateUtentestatsControllerFn);
-router.route('/forgot-password').post(utenteController.forgotPasswordControllerFn);
+router.route('/utente/forgot-password').post(utenteController.forgotPasswordControllerFn);
 
 module.exports = router;
