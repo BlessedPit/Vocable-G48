@@ -91,13 +91,11 @@ onMounted(() => {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 .wrapper {
   font-family: 'Roboto', sans-serif;
-}
-
-/* Definizione del colore blu personalizzato */
+}*/
 .bg-blue-custom {
   background-color: hsl(242, 100%, 50%);
 }
