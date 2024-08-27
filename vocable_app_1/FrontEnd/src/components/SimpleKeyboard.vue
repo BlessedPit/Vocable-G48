@@ -24,11 +24,8 @@ const resetKeyboard = () => {
   console.log('Resetting keyboard...');
   try {
     if (keyboard.value) {
-      // Remove all button themes
       const allButtons = 'Q W E R T Y U I O P A S D F G H J K L Z X C V B N M';
       keyboard.value.removeButtonTheme(allButtons, 'miss found hint');
-      
-      // Optionally, reset to default theme here if needed
     } else {
       console.error('Keyboard not initialized');
     }
@@ -65,18 +62,16 @@ onMounted(() => {
   });
 });
 
-// Watch for changes in resetKeyboard prop to reset the keyboard
 watch(
   () => props.resetKeyboard,
   (reset) => {
     if (reset) {
       console.log('Reset Keyboard Prop:', reset);
-      resetKeyboard(); // Call reset function
+      resetKeyboard();
     }
   }
 );
 
-// Watch for changes in guessedLetters to update button themes
 watch(
   () => props.guessedLetters,
   (guessedLetters) => {

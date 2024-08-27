@@ -36,16 +36,15 @@ export default {
               const chart = context.chart;
               const { ctx, chartArea } = chart;
               if (!chartArea) {
-                // Se non c'è l'area del grafico, non si può disegnare il gradiente
                 return null;
               }
               // Crea un gradiente per le barre
               const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-              gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)'); // Colore blu chiaro all'inizio
-              gradient.addColorStop(1, 'rgba(0, 0, 255, 0.5)'); // Colore blu scuro alla fine
+              gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+              gradient.addColorStop(1, 'rgba(0, 0, 255, 0.5)');
               return gradient;
             },
-            borderRadius: 5, // Rende le barre arrotondate agli angoli
+            borderRadius: 5,
             borderSkipped: false
           }
         ]
@@ -58,7 +57,7 @@ export default {
         responsive: true,
         plugins: {
           legend: {
-            display: false // Nasconde la legenda
+            display: false
           },
           tooltip: {
             callbacks: {
@@ -88,7 +87,7 @@ export default {
 <style scoped>
 .chart-container {
   margin-top: 50px;
-  width: 650px; /* Larghezza del grafico */
-  height: 400px; /* Altezza del grafico */
+  width: 650px;
+  height: 400px;
 }
 </style>
