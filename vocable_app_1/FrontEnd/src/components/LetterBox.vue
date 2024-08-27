@@ -15,7 +15,7 @@ const props = defineProps({ //definisce le props del LetterBox
 
 <template>
     <!--definizione in sé della "scatola" della lettera-->
-    <div class="letterconteiner"
+    <div class="lettercontainer"
     :class="{'border-gray-500 bg-gray-500 text-white'
             :color=='gray', 
             'border-green-600 bg-green-600 text-white'
@@ -30,7 +30,7 @@ const props = defineProps({ //definisce le props del LetterBox
 </template>
 
 <style>
-    .letterconteiner{
+    .lettercontainer{
         grid-column: span 1 / span 1;
         display: flex;
         align-items: center;

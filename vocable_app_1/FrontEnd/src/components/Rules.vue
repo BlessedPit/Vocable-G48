@@ -8,10 +8,10 @@
           Hai <span class="font-bold text-red-600 ml-2 mr-2">6</span> tentativi per indovinare la parola in base alla definizione
         </p>
         <div class="text-left mb-6">
-        <p class="font-semibold">Mi raccomando:</p>
+        <p class="font-semibold">Raccomandazioni:</p>
         <ul class="indented-list">
             <li>
-                <p>Le parole che vuoi inviare devono essere lunghe quanto le caselle presenti!</p>
+                <p>Prima di poter confermare la tua "guess", tutte le caselle devono contenere una lettera!</p>
             </li>
             <li>
                 <p>Le caselle ti aiutano a capire come stai andando!</p>
