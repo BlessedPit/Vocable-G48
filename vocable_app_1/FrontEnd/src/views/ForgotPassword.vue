@@ -41,7 +41,7 @@ export default {
                 emailjs.init("LxMUIwv2KBoQWjQDz");
 
                 const templateparams = {
-                   to_email: req.email,
+                   to_email: this.email,
                    message: 'pallw',
               };
 
