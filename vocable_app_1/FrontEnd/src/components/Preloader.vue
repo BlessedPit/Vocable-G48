@@ -14,7 +14,7 @@
     mounted() {
       setTimeout(() => {
         this.isLoading = false;
-      }, 1000);
+      }, 1200);
     }
   };
   </script>
@@ -33,8 +33,8 @@
     z-index: 9999;
   }
   .spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left: 4px solid #000;
+    border: 4px solid rgba(26, 0, 194, 0.1);
+    border-left: 4px solid #2e65e7;
     border-radius: 50%;
     width: 40px;
     height: 40px;
