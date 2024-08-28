@@ -98,7 +98,7 @@ module.exports.findNicknameByEmail = (email) => {
 }
 
 
-// Funzione di logout (semplice, lato client)
+// Funzione di logout
 module.exports.logoutUtente = (req, res) => {
     // Invia una risposta di successo
     res.status(200).send({
@@ -106,6 +106,7 @@ module.exports.logoutUtente = (req, res) => {
         msg: "Logout avvenuto con successo"
     });
 };
+
 
 module.exports.generateResetToken = (email) => {
     return new Promise((resolve, reject) => {
@@ -123,7 +124,7 @@ module.exports.generateResetToken = (email) => {
                         { expiresIn: '1h' }
                     );
 
-                    resolve({ status: true, msg: "Token generato con successo", resetToken });
+                    resolve({ status: true, msg: "Token generato con successo", data: resetToken });
                 }
             }
         });

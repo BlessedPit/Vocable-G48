@@ -41,7 +41,7 @@ export default {
                 const resetToken = response.data.resetToken;
                 
                 // Costruisci il link di reset
-                const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password?token=${resetToken}`;
+                const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/?token=${resetToken}`;
                 
                 // Invia il link tramite email
                 const serviceID = 'default_service';
@@ -50,7 +50,7 @@ export default {
 
                 const templateParams = {
                     email: this.email,
-                    message: `Clicca qui per resettare la tua password: ${resetLink}`,
+                    message: `${resetLink}`,
                 };
 
                 await emailjs.send(serviceID, templateID, templateParams);
