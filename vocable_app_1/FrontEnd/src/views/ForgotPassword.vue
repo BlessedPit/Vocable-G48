@@ -32,26 +32,35 @@ export default {
     }),
 
     methods: {
-        async sendResetLink() {
-            const { valid } = await this.$refs.form.validate();
-            if (valid) {
-                try{
+    async sendResetLink() {
+        const { valid } = await this.$refs.form.validate();
+        if (valid) {
+            try {
+                // Chiamata API per generare il token
+                const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
+                const resetToken = response.data.resetToken;
+                
+                // Costruisci il link di reset
+                const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password?token=${resetToken}`;
+                
+                // Invia il link tramite email
                 const serviceID = 'default_service';
                 const templateID = 'template_o30m3uc';
                 emailjs.init("LxMUIwv2KBoQWjQDz");
 
-                const templateparams = {
-                   email: this.email,
-                   message: 'pallw',
-              };
+                const templateParams = {
+                    email: this.email,
+                    message: `Clicca qui per resettare la tua password: ${resetLink}`,
+                };
 
-                emailjs.send(serviceID, templateID, templateparams)
-            }catch(error){
-                console.log(error)
-                alert('error')
+                await emailjs.send(serviceID, templateID, templateParams);
+                alert('Link di reset inviato con successo');
+            } catch (error) {
+                console.error(error);
+                alert('Errore durante l\'invio del link di reset');
             }
         }
     }
-    },
+}
 }
 </script>

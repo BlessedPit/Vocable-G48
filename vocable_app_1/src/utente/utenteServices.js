@@ -107,19 +107,25 @@ module.exports.logoutUtente = (req, res) => {
     });
 };
 
-module.exports.sendEmailFn = (templateparams) =>{
-    return new Promise(function myFN(resolve, reject){
-    const serviceID = 'default_service';
-    const templateID = 'template_o30m3uc';
-    emailjs.init("LxMUIwv2KBoQWjQDz");
-    emailjs.send(serviceID, templateID, templateparams)
-          .then(() => {
-            console.log('Email mandata!');
-            resolve({"status":true,"message":"Mail mandata con successo"})
-          })
-          .catch((err) => {
-            console.error('Errore:', err);
-            reject({"status":false,"message":"error "+err})
-          });
+module.exports.generateResetToken = (email) => {
+    return new Promise((resolve, reject) => {
+        utenteModel.findOne({ email }, (error, user) => {
+            if (error) {
+                reject({ status: false, msg: "Errore durante la ricerca dell'utente" });
+            } else {
+                if (!user) {
+                    reject({ status: false, msg: "Email non associata ad alcun account" });
+                } else {
+                    // Genera un token JWT con una scadenza di 1 ora
+                    const resetToken = jwt.sign(
+                        { email: user.email },
+                        process.env.JWT_SECRET,
+                        { expiresIn: '1h' }
+                    );
+
+                    resolve({ status: true, msg: "Token generato con successo", resetToken });
+                }
+            }
         });
-}
+    });
+};
