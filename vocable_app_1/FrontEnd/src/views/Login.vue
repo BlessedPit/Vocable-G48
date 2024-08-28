@@ -115,6 +115,7 @@ export default {
   min-height: 100vh;
   padding: 15px;
   text-align: center;
+  background: linear-gradient(165deg, rgba(89, 158, 255, 0.264), rgb(1, 43, 255)); 
 }
 
 .login-container {

@@ -117,6 +117,7 @@ export default {
   min-height: 100vh;
   padding: 15px;
   text-align: center;
+  background: linear-gradient(185deg, rgba(34, 126, 255, 0.563), rgba(33, 33, 255, 0.93)); 
 }
 
 .register-container {
