@@ -107,11 +107,9 @@ module.exports.logoutUtente = (req, res) => {
     });
 };
 
-
 module.exports.generateResetToken = (email) => {
-    console.log("JWT Secret:", process.env.JWT_SECRET);
     console.log("Inizio generazione token per email:", email);
-
+    console.log("JWT: ", process.env.JWT_SECRET);
     return new Promise((resolve, reject) => {
         utenteModel.findOne({ email: email }, (err, user) => {
             if (err) {
@@ -123,14 +121,18 @@ module.exports.generateResetToken = (email) => {
                     reject({ status: false, msg: "Email non associata ad alcun account" });
                 } else {
                     console.log("Utente trovato, generazione token...");
+                    
+                    try {
+                        const payload = { email: user.email };
+                        const options = { expiresIn: '1h' };
+                        const resetToken = jwt.sign(payload, process.env.JWT_SECRET, options);
 
-                    // Genera un token JWT con una scadenza di 1 ora
-                    const payload = { email: user.email };
-                    const options = { expiresIn: '1h' };
-                    const resetToken = jwt.sign(payload, process.env.JWT_SECRET, options);
-
-                    console.log("Token generato:", resetToken);
-                    resolve({ status: true, msg: "Token generato con successo", resetToken: resetToken });
+                        console.log("Token generato:", resetToken);
+                        resolve({ status: true, msg: "Token generato con successo", resetToken: resetToken });
+                    } catch (tokenErr) {
+                        console.error("Errore durante la generazione del token JWT:", tokenErr);
+                        reject({ status: false, msg: "Errore durante la generazione del token" });
+                    }
                 }
             }
         });
