@@ -100,8 +100,11 @@ export default {
                     await emailjs.send(serviceID, templateID, templateParams);
                     alert('Link di reset inviato con successo');
                 }
-                else {
+                else if (response.status == false) {
                     alert('Errore durante la generazione del token');
+                }
+                else {
+                    alert('Errore nella chiamata a funzione');
                 }
             } catch (error) {
                 console.error(error);
