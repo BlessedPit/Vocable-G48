@@ -81,23 +81,28 @@ export default {
             try {
                 // Chiamata API per generare il token
                 const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
-                const resetToken = response.resetToken;
+                if (response.status==true) {
+                    const resetToken = response.resetToken;
                 
-                // Costruisci il link di reset
-                const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/?token=${resetToken}`;
+                    // Costruisci il link di reset
+                    const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/?token=${resetToken}`;
                 
-                // Invia il link tramite email
-                const serviceID = 'default_service';
-                const templateID = 'template_o30m3uc';
-                emailjs.init("LxMUIwv2KBoQWjQDz");
+                    // Invia il link tramite email
+                    const serviceID = 'default_service';
+                    const templateID = 'template_o30m3uc';
+                    emailjs.init("LxMUIwv2KBoQWjQDz");
 
-                const templateParams = {
-                    email: this.email,
-                    message: `${resetLink}`,
-                };
+                    const templateParams = {
+                        email: this.email,
+                        message: `${resetLink}`,
+                    };
 
-                await emailjs.send(serviceID, templateID, templateParams);
-                alert('Link di reset inviato con successo');
+                    await emailjs.send(serviceID, templateID, templateParams);
+                    alert('Link di reset inviato con successo');
+                }
+                else {
+                    alert('Errore durante la generazione del token');
+                }
             } catch (error) {
                 console.error(error);
                 alert('Errore durante l\'invio del link di reset');
