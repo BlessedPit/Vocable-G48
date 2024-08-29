@@ -81,7 +81,7 @@ export default {
             try {
                 // Chiamata API per generare il token
                 const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
-                const resetToken = response.data.resetToken;
+                const resetToken = response.resetToken;
                 
                 // Costruisci il link di reset
                 const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/?token=${resetToken}`;
