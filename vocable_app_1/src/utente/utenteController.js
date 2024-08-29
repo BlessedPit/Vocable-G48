@@ -40,7 +40,6 @@ var loginUtenteControllerFn = async (req, res) => {
     }
 }
 
-
 var forgotPasswordControllerFn = async (req, res) => {
     try {
         console.log("Richiesta di reset password ricevuta:", req.body); // Log dei dati ricevuti nella richiesta
