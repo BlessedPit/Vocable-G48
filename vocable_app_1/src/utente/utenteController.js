@@ -44,7 +44,7 @@ var forgotPasswordControllerFn = async (req, res) => {
     try {
         console.log("Richiesta di reset password ricevuta:", req.body); // Log dei dati ricevuti nella richiesta
 
-        const status = await generateResetToken(req.body.email);
+        const status = await utenteService.generateResetToken(req.body.email);
         console.log("Risultato dalla funzione generateResetToken:", status); // Log del risultato della generazione del token
 
         if (status && status.status === true) {
