@@ -31,14 +31,13 @@ export default {
         labels: [ 'Partite vinte in 1', 'Partite vinte in 2', 'Partite vinte in 3', 'Partite vinte in 4', 'Partite vinte in 5', 'Partite vinte in 6' ],
         datasets: [ 
           {
-            data: [this.won1, this.won2, this.won3, this.won4, this.won5, this.won6], // Usa i dati passati come props
+            data: [this.won1, this.won2, this.won3, this.won4, this.won5, this.won6],
             backgroundColor: (context) => {
               const chart = context.chart;
               const { ctx, chartArea } = chart;
               if (!chartArea) {
                 return null;
               }
-              // Crea un gradiente per le barre
               const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
               gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
               gradient.addColorStop(1, 'rgba(0, 0, 255, 0.5)');
@@ -55,6 +54,7 @@ export default {
     return {
       chartOptions: {
         responsive: true,
+        maintainAspectRatio: false, // Impedisce la conservazione del rapporto d'aspetto
         plugins: {
           legend: {
             display: false
@@ -86,8 +86,14 @@ export default {
 
 <style scoped>
 .chart-container {
-  margin-top: 50px;
-  width: 650px;
-  height: 400px;
+  position: relative;
+  width: 100%; /* Flessibile per adattarsi alla larghezza del contenitore */
+  height: 300px; /* Altezza iniziale, può essere modificata con media queries */
+}
+
+@media (max-width: 600px) {
+  .chart-container {
+    height: 200px; /* Altezza ridotta per schermi più piccoli */
+  }
 }
 </style>

@@ -30,8 +30,6 @@
   </v-sheet>
 </template>
 
-
-
 <script>
 import { mapGetters } from 'vuex';
 import axios from 'axios';
@@ -80,7 +78,6 @@ export default {
   color: #4a5568;
 }
 
-
 .chart-section {
   margin-top: 10px;
   margin-bottom: 0px;
@@ -92,6 +89,15 @@ export default {
   color: #4052e0;
 }
 
+@media (max-width: 600px) {
+  .chart-title {
+    font-size: 1rem;
+  }
+
+  .chart-section {
+    margin-top: 5px;
+  }
+}
 
 .statistic-title {
   font-size: 1.2rem;
@@ -103,7 +109,6 @@ export default {
   margin-top: 0px;
 }
 
-
 .statistics-wrapper {
   display: flex;
   justify-content: center;
@@ -111,7 +116,6 @@ export default {
   gap: 20px;
   padding: 20px;
 }
-
 
 .stat-card {
   background: #ffffff;
@@ -129,7 +133,6 @@ export default {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-
 .stat-title {
   font-weight: 600;
   color: #4052e0;
@@ -139,5 +142,13 @@ export default {
 .stat-value {
   font-size: 1.5rem;
   color: #4a5568;
+}
+
+@media (max-width: 600px) {
+  .statistics-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 }
 </style>
