@@ -1,10 +1,6 @@
 <template>
   <div class="chart-container mx-auto">
-    <Bar
-      id="my-chart-id"
-      :options="chartOptions"
-      :data="computedChartData"
-    />
+    <Bar id="my-chart-id" :options="chartOptions" :data="computedChartData" />
   </div>
 </template>
 
@@ -28,8 +24,8 @@ export default {
   computed: {
     computedChartData() {
       return {
-        labels: [ 'Partite vinte in 1', 'Partite vinte in 2', 'Partite vinte in 3', 'Partite vinte in 4', 'Partite vinte in 5', 'Partite vinte in 6' ],
-        datasets: [ 
+        labels: ['Partite vinte in 1', 'Partite vinte in 2', 'Partite vinte in 3', 'Partite vinte in 4', 'Partite vinte in 5', 'Partite vinte in 6'],
+        datasets: [
           {
             data: [this.won1, this.won2, this.won3, this.won4, this.won5, this.won6],
             backgroundColor: (context) => {
@@ -61,7 +57,7 @@ export default {
           },
           tooltip: {
             callbacks: {
-              label: function(tooltipItem) {
+              label: function (tooltipItem) {
                 return `Value: ${tooltipItem.raw}`;
               }
             }
@@ -89,17 +85,18 @@ export default {
   position: relative;
   width: 90%;
   max-width: 800px;
-  max-height:400px;
   margin: 20px auto;
-  padding: 20px; 
-  box-sizing: border-box; 
+  padding: 20px;
+  box-sizing: border-box;
+  height: 400px;
 }
+
 
 @media (max-width: 600px) {
   .chart-container {
-    height: 200px; 
+    height: 200px;
     width: 100%;
-    padding: 10px; 
+    padding: 10px;
   }
 }
 </style>
