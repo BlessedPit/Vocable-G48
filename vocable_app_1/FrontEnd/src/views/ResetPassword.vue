@@ -76,8 +76,7 @@ export default {
         confirmPassword: '',
         passwordRules: [
             v => !!v || 'Obbligatorio',
-            v => (v && v.length >= 6) || 'Password troppo corta, almeno 6 caratteri',
-            v => (v && v.length <= 15) || 'La password deve essere al massimo 15 caratteri!'
+            v => (v && v.length >= 6) || 'Password troppo corta, almeno 6 caratteri'
         ],
     }),
 
