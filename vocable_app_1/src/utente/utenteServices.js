@@ -110,6 +110,7 @@ module.exports.logoutUtente = (req, res) => {
 
 module.exports.generateResetToken = (email) => {
     console.log("Inizio generazione token per email:", email); // Log dell'email per cui si sta generando il token
+    console.log("JWT_SECRET:", process.env.JWT_SECRET); // Log del valore di JWT_SECRET
 
     return new Promise((resolve, reject) => {
         utenteModel.findOne({ email: email }, (err, user) => {
