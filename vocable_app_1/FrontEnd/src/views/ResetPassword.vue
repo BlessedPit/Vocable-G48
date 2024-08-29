@@ -5,7 +5,7 @@
                 <img src="/logoVuoto.png" alt="Vocable Logo" class="logo-img" />
                 <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white mb-4">Reset
                     password</span>
-
+                <p>Token: {{ token }}</p>
                 <v-text-field class="required mt-4" type="password" :rules="passwordRules" v-model="newPassword"
                     label="Nuova Password" variant="underlined"></v-text-field>
 
@@ -70,6 +70,7 @@
 
 <script>
 export default {
+    props: ['token'],
     data: () => ({
         newPassword: '',
         confirmPassword: '',
@@ -83,17 +84,11 @@ export default {
 
     methods: {
         async resetPassword() {
-            const { valid } = await this.$refs.form.validate();
-            if (valid) {
-                try {
-                    const token = this.$route.params.token;
-                    await this.$http.post(`/utente/reset-password/${token}`, { newPassword: this.newPassword });
-                    alert('Password cambiata con successo');
-                } catch (error) {
-                    alert('Errore nel cambio della password');
-                }
-            }
+           
         },
     },
+    mounted() {
+    console.log("Token ricevuto:", this.token);
+  }
 }
 </script>
