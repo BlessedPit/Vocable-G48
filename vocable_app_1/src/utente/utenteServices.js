@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const encryptor = require('simple-encryptor')('hqBzkw4H7Iog6561'); // chiave per criptare le password
 require('dotenv').config();
 const emailjs = require('emailjs-com');
+const client = emailjs.init(process.env.EMAILJS_USER_ID);
 
 // Funzione per la creazione di un nuovo utente
 module.exports.createUtenteDBService = (utenteDetails) => {
@@ -107,6 +108,7 @@ module.exports.logoutUtente = (req, res) => {
     });
 };
 
+/*
 module.exports.generateResetToken = (email) => {
     console.log("Inizio generazione token per email:", email);
     console.log("JWT: ", process.env.JWT_SECRET);
@@ -137,4 +139,25 @@ module.exports.generateResetToken = (email) => {
             }
         });
     });
+};
+*/
+
+async function sendPasswordResetEmail(email, resetToken) {
+    const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/?token=${resetToken}`;
+
+    const templateParams = {
+        email: email,
+        message: `Clicca sul seguente link per resettare la tua password: ${resetLink}`,
+    };
+
+    try {
+        const response = await client.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID, templateParams);
+        return response;
+    } catch (error) {
+        throw new Error(`Errore durante l'invio dell'email: ${error.message}`);
+    }
+}
+
+module.exports = {
+    sendPasswordResetEmail,
 };

@@ -40,6 +40,7 @@ var loginUtenteControllerFn = async (req, res) => {
     }
 }
 
+/*
 var forgotPasswordControllerFn = async (req, res) => {
     try {
         console.log("Richiesta di reset password ricevuta:", req.body); // Log dei dati ricevuti nella richiesta
@@ -69,7 +70,7 @@ var forgotPasswordControllerFn = async (req, res) => {
         });
     }
 };
-
+*/
 
 var meUtenteControllerFn = async (req, res) => {
     try {
@@ -107,5 +108,29 @@ var logoutUtenteControllerFn = async (req, res) => {
     }
 }
 
+const jwt = require('jsonwebtoken');
+const utenteServices = require('./utenteServices');
 
-module.exports = { createUtenteControllerFn, loginUtenteControllerFn, meUtenteControllerFn, logoutUtenteControllerFn,forgotPasswordControllerFn  };
+// Funzione per gestire la richiesta di reset della password
+async function forgotPassword(req, res) {
+    const { email } = req.body;
+
+    // Verifica se l'email esiste nel database
+    // TODO: Aggiungi la logica di verifica dell'email
+
+    // Genera un token di reset
+    const resetToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    try {
+        // Invia l'email con il link di reset
+        await utenteServices.sendPasswordResetEmail(email, resetToken);
+        res.status(200).json({ status: true, message: 'Link di reset inviato con successo' });
+    } catch (error) {
+        console.error('Errore durante l\'invio del link di reset:', error);
+        res.status(500).json({ status: false, message: 'Errore durante l\'invio del link di reset' });
+    }
+}
+
+
+
+module.exports = { createUtenteControllerFn, loginUtenteControllerFn, meUtenteControllerFn, logoutUtenteControllerFn, /*forgotPasswordControllerFn*/forgotPassword  };
