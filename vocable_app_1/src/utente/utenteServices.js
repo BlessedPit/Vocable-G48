@@ -118,12 +118,9 @@ module.exports.generateResetToken = (email) => {
                     reject({ status: false, msg: "Email non associata ad alcun account" });
                 } else {
                     // Genera un token JWT con una scadenza di 1 ora
-                    const resetToken = jwt.sign(
-                        { email: user.email },
-                        process.env.JWT_SECRET,
-                        { expiresIn: '1h' }
-                    );
-
+                    const payload = { email: user.email };
+                    const options = { expiresIn: '1h' };
+                    const resetToken = jwt.sign(payload, process.env.JWT_SECRET, options);
                     resolve({ status: true, msg: "Token generato con successo", resetToken: resetToken });
                 }
             }
