@@ -80,7 +80,7 @@ export default {
         if (valid) {
             try {
                 // Chiamata API per generare il token
-                const response = await axios.post('/api/utente/forgot-password', { email: this.email });
+                const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
                 if (response.status==true) {
                     const resetToken = response.resetToken;
                 
