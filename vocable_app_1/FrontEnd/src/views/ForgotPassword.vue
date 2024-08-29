@@ -84,35 +84,29 @@ export default {
     methods: {
         async sendResetLink() {
             const { valid } = await this.$refs.form.validate();
-            console.log("Validazione form:", valid); // Aggiungi qui per vedere se la validazione è riuscita
+
 
             if (valid) {
                 try {
-                    console.log("Inizio chiamata API per reset password"); // Per vedere quando parte la chiamata API
-                    const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
 
-                    console.log("Risposta dall'API:", response); // Log dell'intera risposta API
-                    console.log("Dati di risposta:", response.data); // Log dei dati specifici della risposta
+                    const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/forgot-password', { email: this.email });
 
                     if (response.data.status) {
                         const resetToken = response.data.resetToken;
-                        console.log("Token di reset ricevuto:", resetToken); // Per confermare la ricezione del token
+                       
 
                         const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/${resetToken}`;
-                        console.log("Link di reset generato:", resetLink); // Per vedere il link di reset generato
-                        console.log("Process Env:", process.env);
+                       
 
-                        console.log("emailuserID: ", process.env.VUE_APP_EMAILJS_USER_ID);
-                        emailjs.init(process.env.VUE_APP_EMAILJS_USER_ID);
+                        emailjs.init("LxMUIwv2KBoQWjQDz");
 
                         const templateParams = {
                             email: this.email,
                             message: `${resetLink}`,
                         };
 
-                        console.log("Inizio invio email con emailjs"); // Per vedere quando inizia l'invio dell'email
-                        const emailResponse = await emailjs.send(process.env.VUE_APP_EMAIL_SERVICE_ID, process.env.VUE_APP_EMAILJS_TEMPLATE_ID, templateParams);
-                        //const emailResponse = await emailjs.send('default_service', 'template_o30m3uc', templateParams);
+              
+                        const emailResponse = await emailjs.send('default_service', 'template_o30m3uc', templateParams);
                         console.log("Risposta dall'invio email:", emailResponse); // Log della risposta da emailjs
 
                         alert('Link di reset inviato con successo');
