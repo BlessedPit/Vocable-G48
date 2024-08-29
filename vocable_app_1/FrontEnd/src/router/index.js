@@ -34,7 +34,7 @@ const routes = [
     path: '/reset-password/:token',
     name: 'ResetPassword',
     component: ResetPassword,
-    props: true // Permette di passare i parametri della route come props
+    props: true 
   },
   { path: '/resetpsw-emailsent', component: EmailSent, name: 'email-sent' }
 ]
