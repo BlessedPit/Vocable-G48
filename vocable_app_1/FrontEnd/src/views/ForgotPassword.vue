@@ -113,6 +113,8 @@ export default {
                         console.log("Risposta dall'invio email:", emailResponse); // Log della risposta da emailjs
 
                         alert('Link di reset inviato con successo');
+                        this.$router.push({ name: 'email-sent' });
+
                     } else {
                         console.error('Errore durante la generazione del token:', response.data.message); // Log in caso di errore nella generazione del token
                         alert('Errore durante la generazione del token');
