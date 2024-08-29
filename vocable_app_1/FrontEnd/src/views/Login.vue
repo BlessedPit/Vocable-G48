@@ -88,18 +88,18 @@ export default {
           alert(response.data.message)
         } else {
           console.log("rerouting to userstats"),
-          this.$router.replace({ name: 'userstats' });
+            this.$router.replace({ name: 'userstats' });
         }
 
       } catch (error) {
         console.error('Errore durante il login:', error);
-        alert('Errore durante il login',error);
+        alert('Errore durante il login', error);
       } finally {
         this.loading = false;
-        setTimeout(()=>
-        this.$router.replace({ name: 'userstats' }),500)
+        setTimeout(() =>
+          this.$router.replace({ name: 'userstats' }), 500)
       }
-      
+
     }
 
   }
@@ -115,7 +115,7 @@ export default {
   min-height: 100vh;
   padding: 15px;
   text-align: center;
-  background: linear-gradient(165deg, rgba(89, 158, 255, 0.264), rgb(1, 43, 255)); 
+  background: linear-gradient(165deg, rgba(89, 158, 255, 0.264), rgb(1, 43, 255));
 }
 
 .login-container {

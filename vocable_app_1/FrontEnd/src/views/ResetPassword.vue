@@ -5,7 +5,7 @@
                 <img src="/logoVuoto.png" alt="Vocable Logo" class="logo-img" />
                 <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white mb-4">Reset
                     password</span>
-                <p>Token: {{ token }}</p>
+
                 <v-text-field class="required mt-4" type="password" :rules="passwordRules" v-model="newPassword"
                     label="Nuova Password" variant="underlined"></v-text-field>
 
@@ -76,35 +76,40 @@ export default {
         confirmPassword: '',
         passwordRules: [
             v => !!v || 'Obbligatorio',
-            v => (v && v.length >= 6) || 'Password troppo corta, almeno 6 caratteri'
-        ],
+            v => v && v.length >= 6 || 'Password troppo corta, almeno 6 caratteri'
+        ]
     }),
 
     async resetPassword() {
-      // Validazione delle password
-      if (this.newPassword !== this.confirmPassword) {
-        alert('Le password non corrispondono');
-        return;
-      }
+        console.log('Token:', this.token);
+        console.log('New Password:', this.newPassword);
+        console.log('Confirm Password:', this.confirmPassword);
 
-      try {
-        // Invia la richiesta di reset della password al server
-        const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/reset-password', {
-          token: this.token,
-          newPassword: this.newPassword
-        });
-
-        if (response.data.status) {
-          alert('Password resettata con successo');
-          // Redirigi l'utente alla pagina di login o a un'altra pagina
-          this.$router.push({ name: 'login' });
-        } else {
-          alert('Errore nel reset della password: ' + response.data.message);
+        // Validazione delle password
+        if (this.newPassword !== this.confirmPassword) {
+            alert('Le password non corrispondono');
+            return;
         }
-      } catch (error) {
-        console.error('Errore durante il reset della password:', error);
-        alert('Errore durante il reset della password');
-      }
+
+        try {
+            // Invia la richiesta di reset della password al server
+            const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/reset-password', {
+                token: this.token,
+                newPassword: this.newPassword
+            });
+
+            if (response.data.status) {
+                alert('Password resettata con successo');
+                // Redirigi l'utente alla pagina di login o a un'altra pagina
+                this.$router.push({ name: 'login' });
+            } else {
+                alert('Errore nel reset della password: ' + response.data.message);
+            }
+        } catch (error) {
+            console.error('Errore durante il reset della password:', error);
+            alert('Errore durante il reset della password');
+        }
     }
+
 }
 </script>
