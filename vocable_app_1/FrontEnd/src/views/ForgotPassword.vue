@@ -100,7 +100,7 @@ export default {
 
                         const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/${resetToken}`;
                         console.log("Link di reset generato:", resetLink); // Per vedere il link di reset generato
-
+                        console.log("emailuserID: ", process.env.EMAILJS_USER_ID);
                         emailjs.init(process.env.EMAILJS_USER_ID);
 
                         const templateParams = {
