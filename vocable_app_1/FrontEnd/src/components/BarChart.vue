@@ -54,7 +54,7 @@ export default {
     return {
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false, // Impedisce la conservazione del rapporto d'aspetto
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: false
@@ -87,13 +87,18 @@ export default {
 <style scoped>
 .chart-container {
   position: relative;
-  width: 100%; /* Flessibile per adattarsi alla larghezza del contenitore */
-  height: 300px; /* Altezza iniziale, può essere modificata con media queries */
+  width: 90%; /* Imposta la larghezza al 90% del contenitore */
+  max-width: 800px; /* Imposta una larghezza massima per schermi più larghi */
+  margin: 20px auto; /* Centratura e spazio superiore/inferiore */
+  padding: 20px; /* Spazio interno */
+  box-sizing: border-box; /* Include padding e border nella larghezza totale */
 }
 
 @media (max-width: 600px) {
   .chart-container {
     height: 200px; /* Altezza ridotta per schermi più piccoli */
+    width: 100%; /* Larghezza al 100% del contenitore */
+    padding: 10px; /* Spazio interno ridotto per schermi più piccoli */
   }
 }
 </style>
