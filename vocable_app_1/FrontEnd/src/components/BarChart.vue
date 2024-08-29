@@ -89,7 +89,7 @@ export default {
   position: relative;
   width: 90%;
   max-width: 800px;
-  max-width:400px;
+  max-height:400px;
   margin: 20px auto;
   padding: 20px; 
   box-sizing: border-box; 
