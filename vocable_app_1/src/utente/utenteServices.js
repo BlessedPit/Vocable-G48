@@ -109,18 +109,26 @@ module.exports.logoutUtente = (req, res) => {
 
 
 module.exports.generateResetToken = (email) => {
+    console.log("Inizio generazione token per email:", email); // Log dell'email per cui si sta generando il token
+
     return new Promise((resolve, reject) => {
         utenteModel.findOne({ email: email }, (err, user) => {
             if (err) {
+                console.error("Errore durante la ricerca dell'utente:", err); // Log dell'errore se la ricerca fallisce
                 reject({ status: false, msg: "Errore durante la ricerca dell'utente" });
             } else {
                 if (!user) {
+                    console.warn("Email non trovata:", email); // Log se l'email non è associata a nessun account
                     reject({ status: false, msg: "Email non associata ad alcun account" });
                 } else {
+                    console.log("Utente trovato, generazione token..."); // Log se l'utente viene trovato
+
                     // Genera un token JWT con una scadenza di 1 ora
                     const payload = { email: user.email };
                     const options = { expiresIn: '1h' };
                     const resetToken = jwt.sign(payload, process.env.JWT_SECRET, options);
+
+                    console.log("Token generato:", resetToken); // Log del token generato
                     resolve({ status: true, msg: "Token generato con successo", resetToken: resetToken });
                 }
             }

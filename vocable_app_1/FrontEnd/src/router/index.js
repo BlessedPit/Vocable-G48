@@ -4,7 +4,7 @@ import About from '../views/About.vue'
 import Gameplay from '../views/Gameplay.vue'
 import UserStats from '../views/UserStats.vue'
 import Login from '../views/Login.vue'
-import RegistrationPietro from '../views/Registration.vue'
+import Registration from '../views/Registration.vue'
 import RegistrationComplete from '@/views/RegistrationComplete.vue'
 import store from '@/store'
 import ForgotPassword from '@/views/ForgotPassword.vue'
@@ -26,7 +26,7 @@ const routes = [
       next()
     }
   },
-  { path: '/registration', component: RegistrationPietro, name: 'registration' },
+  { path: '/registration', component: Registration, name: 'registration' },
   { path: '/registrationcomplete', component: RegistrationComplete, name: 'registrationcomplete' },
   { path: '/forgot-password', component: ForgotPassword, name: 'forgotpassword' },
   {
