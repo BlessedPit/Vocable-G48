@@ -13,5 +13,6 @@ router.route('/utente/logout').post(authenticateToken, utenteController.logoutUt
 router.route('/utente/get-stats').get(authenticateToken, utentestatsController.statGetterControllerFn);
 router.route('/utente/update-stats').post(authenticateToken, utentestatsController.updateUtentestatsControllerFn);
 router.route('/utente/forgot-password').post(utenteController.forgotPasswordControllerFn);
+router.route('utente/reset-password').post(utenteController.resetPasswordControllerFn);
 
 module.exports = router;
