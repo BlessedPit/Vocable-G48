@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper d-flex align-center justify-center">
         <v-sheet class="pa-6 elevation-2 text-center pa-10" rounded max-width="500px" width="100%">
-            <v-form ref="form">
+            <v-form ref="form" @submit.prevent="resetPassword">
                 <img src="/logoVuoto.png" alt="Vocable Logo" class="logo-img" />
                 <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white mb-4">Reset
                     password</span>
@@ -69,6 +69,7 @@
 
 
 <script>
+import axios from 'axios';
 export default {
     props: ['token'],
     data: () => ({
@@ -80,7 +81,9 @@ export default {
         ]
     }),
 
+    methods: {
     async resetPassword() {
+        console.log('resetPassword chiamato');
         console.log('Token:', this.token);
         console.log('New Password:', this.newPassword);
         console.log('Confirm Password:', this.confirmPassword);
@@ -110,6 +113,8 @@ export default {
             alert('Errore durante il reset della password');
         }
     }
+}
+
 
 }
 </script>
