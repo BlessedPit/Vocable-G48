@@ -87,18 +87,19 @@ export default {
 <style scoped>
 .chart-container {
   position: relative;
-  width: 90%; /* Imposta la larghezza al 90% del contenitore */
-  max-width: 800px; /* Imposta una larghezza massima per schermi più larghi */
-  margin: 20px auto; /* Centratura e spazio superiore/inferiore */
-  padding: 20px; /* Spazio interno */
-  box-sizing: border-box; /* Include padding e border nella larghezza totale */
+  width: 90%;
+  max-width: 800px;
+  max-width:400px;
+  margin: 20px auto;
+  padding: 20px; 
+  box-sizing: border-box; 
 }
 
 @media (max-width: 600px) {
   .chart-container {
-    height: 200px; /* Altezza ridotta per schermi più piccoli */
-    width: 100%; /* Larghezza al 100% del contenitore */
-    padding: 10px; /* Spazio interno ridotto per schermi più piccoli */
+    height: 200px; 
+    width: 100%;
+    padding: 10px; 
   }
 }
 </style>
