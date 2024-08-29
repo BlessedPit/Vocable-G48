@@ -112,7 +112,7 @@ const jwt = require('jsonwebtoken');
 const utenteServices = require('./utenteServices');
 
 // Funzione per gestire la richiesta di reset della password
-async function forgotPassword(req, res) {
+async function forgotPasswordControllerFn(req, res) {
     const { email } = req.body;
 
     // Verifica se l'email esiste nel database
@@ -133,4 +133,4 @@ async function forgotPassword(req, res) {
 
 
 
-module.exports = { createUtenteControllerFn, loginUtenteControllerFn, meUtenteControllerFn, logoutUtenteControllerFn, /*forgotPasswordControllerFn*/forgotPassword  };
+module.exports = { createUtenteControllerFn, loginUtenteControllerFn, meUtenteControllerFn, logoutUtenteControllerFn, forgotPasswordControllerFn  };
