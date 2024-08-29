@@ -110,8 +110,8 @@ module.exports.logoutUtente = (req, res) => {
 
 module.exports.generateResetToken = (email) => {
     return new Promise((resolve, reject) => {
-        utenteModel.findOne({ email }, (error, user) => {
-            if (error) {
+        utenteModel.findOne({ email: email }, (err, user) => {
+            if (err) {
                 reject({ status: false, msg: "Errore durante la ricerca dell'utente" });
             } else {
                 if (!user) {
