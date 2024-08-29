@@ -49,7 +49,7 @@ var forgotPasswordControllerFn = async (req, res) => {
         console.log("Status dal servizio:", status);
 
         if (status && status.status === true) {
-            res.send({ "status": true, "message": "Token di reset generato con successo. Controlla la tua email per il link di reset.", "resetToken": status.resetToken });
+            res.send({ "status": true, "message": "Token di reset generato con successo. Controlla la tua email per il link di reset.", "resetToken": status.data });
         } else {
             res.send({ "status": false, "message": status.msg || "Errore: Impossibile generare il token di reset" });
         }

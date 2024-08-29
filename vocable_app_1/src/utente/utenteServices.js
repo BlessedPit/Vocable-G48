@@ -124,7 +124,7 @@ module.exports.generateResetToken = (email) => {
                         { expiresIn: '1h' }
                     );
 
-                    resolve({ status: true, msg: "Token generato con successo", resetToken: resetToken });
+                    resolve({ status: true, msg: "Token generato con successo", data: resetToken });
                 }
             }
         });
