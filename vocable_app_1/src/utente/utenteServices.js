@@ -108,30 +108,38 @@ module.exports.logoutUtente = (req, res) => {
     });
 };
 
+
+
 module.exports.generateResetToken = (email) => {
     console.log("Inizio generazione token per email:", email);
+    
     return new Promise((resolve, reject) => {
+        // Trova l'utente con l'email fornita
         utenteModel.findOne({ email: email }, (err, user) => {
             if (err) {
                 console.error("Errore durante la ricerca dell'utente:", err);
-                reject({ status: false, msg: "Errore durante la ricerca dell'utente" });
-            } else {
-                if (!user) {
-                    console.warn("Email non trovata:", email);
-                    reject({ status: false, msg: "Email non associata ad alcun account" });
-                } else {
-                    try {
-                        const payload = { email: user.email };
-                        const options = { expiresIn: '1h' };
-                        const resetToken = jwt.sign(payload, 'balls'/*process.env.JWT_SECRET*/, options);
+                return reject({ status: false, msg: "Errore durante la ricerca dell'utente" });
+            }
 
-                        console.log("Token generato:", resetToken);
-                        resolve({ status: true, msg: "Token generato con successo", resetToken: resetToken });
-                    } catch (tokenErr) {
-                        console.error("Errore durante la generazione del token JWT:", tokenErr);
-                        reject({ status: false, msg: "Errore durante la generazione del token" });
-                    }
-                }
+            if (!user) {
+                console.warn("Email non trovata:", email);
+                return reject({ status: false, msg: "Email non associata ad alcun account" });
+            }
+
+            try {
+                // Crea il payload per il token
+                const payload = { email: user.email };
+                const options = { expiresIn: '1h' }; // Imposta la scadenza del token
+                const secret = process.env.JWT_SECRET || 'your_secret_key'; // Usa una variabile d'ambiente per il segreto
+
+                // Genera il token JWT
+                const resetToken = jwt.sign(payload, secret, options);
+
+                console.log("Token generato:", resetToken);
+                return resolve({ status: true, msg: "Token generato con successo", resetToken });
+            } catch (tokenErr) {
+                console.error("Errore durante la generazione del token JWT:", tokenErr);
+                return reject({ status: false, msg: "Errore durante la generazione del token" });
             }
         });
     });
