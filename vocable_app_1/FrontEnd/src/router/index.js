@@ -30,7 +30,7 @@ const routes = [
   { path: '/registrationcomplete', component: RegistrationComplete, name: 'registrationcomplete' },
   { path: '/forgot-password', component: ForgotPassword, name: 'forgotpassword' },
   {
-    path: '/reset-password',
+    path: '/reset-password/:token',
     name: 'ResetPassword',
     component: ResetPassword,
     props: true // Permette di passare i parametri della route come props
