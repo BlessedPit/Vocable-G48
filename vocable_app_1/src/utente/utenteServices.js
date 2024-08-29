@@ -144,3 +144,41 @@ module.exports.generateResetToken = (email) => {
         });
     });
 };
+
+
+
+module.exports.resetPassword = async (token, newPassword) => {
+    return new Promise((resolve, reject) => {
+        if (!token || !newPassword) {
+            return reject({ status: false, msg: 'Token e nuova password sono obbligatori' });
+        }
+
+        // Decodifica il token JWT
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return reject({ status: false, msg: 'Token non valido' });
+            }
+
+            try {
+                // Trova l'utente con l'email decodificata
+                const user = await utenteModel.findOne({ email: decoded.email });
+                
+                if (!user) {
+                    return reject({ status: false, msg: 'Utente non trovato' });
+                }
+
+                // Cifra la nuova password
+                const encryptedPassword = encryptor.encrypt(newPassword);
+
+                // Aggiorna la password dell'utente
+                user.password = encryptedPassword;
+                await user.save();
+
+                resolve({ status: true, msg: 'Password aggiornata con successo' });
+            } catch (error) {
+                console.error('Errore durante l\'aggiornamento della password:', error);
+                reject({ status: false, msg: 'Errore durante l\'aggiornamento della password' });
+            }
+        });
+    });
+};

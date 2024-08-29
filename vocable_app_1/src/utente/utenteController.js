@@ -1,6 +1,6 @@
 const { response } = require("express");
 var utenteService = require("./utenteServices");
-//const authenticateToken = require('./authenticateToken');
+
 
 var createUtenteControllerFn = async (req, res) => {
     try {
@@ -123,9 +123,24 @@ var logoutUtenteControllerFn = async (req, res) => {
     }
 }
 
-const jwt = require('jsonwebtoken');
-const utenteServices = require('./utenteServices');
+const resetPasswordControllerFn = async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+        
+        const result = await utenteService.resetPassword(token, newPassword);
+
+        res.status(200).send(result);
+    } catch (err) {
+        console.error('Errore durante il reset della password:', err);
+        res.status(500).send({
+            status: false,
+            message: 'Errore durante il reset della password'
+        });
+    }
+};
 
 
 
-module.exports = { createUtenteControllerFn, loginUtenteControllerFn, meUtenteControllerFn, logoutUtenteControllerFn, forgotPasswordControllerFn };
+
+
+module.exports = { createUtenteControllerFn, loginUtenteControllerFn, meUtenteControllerFn, logoutUtenteControllerFn, forgotPasswordControllerFn, resetPasswordControllerFn };

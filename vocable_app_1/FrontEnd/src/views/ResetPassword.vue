@@ -82,13 +82,31 @@ export default {
         ],
     }),
 
-    methods: {
-        async resetPassword() {
-           
-        },
-    },
-    mounted() {
-    console.log("Token ricevuto:", this.token);
-  }
+    async resetPassword() {
+      // Validazione delle password
+      if (this.newPassword !== this.confirmPassword) {
+        alert('Le password non corrispondono');
+        return;
+      }
+
+      try {
+        // Invia la richiesta di reset della password al server
+        const response = await axios.post('https://vocable-g48-production-a10a.up.railway.app/api/utente/reset-password', {
+          token: this.token,
+          newPassword: this.newPassword
+        });
+
+        if (response.data.status) {
+          alert('Password resettata con successo');
+          // Redirigi l'utente alla pagina di login o a un'altra pagina
+          this.$router.push({ name: 'login' });
+        } else {
+          alert('Errore nel reset della password: ' + response.data.message);
+        }
+      } catch (error) {
+        console.error('Errore durante il reset della password:', error);
+        alert('Errore durante il reset della password');
+      }
+    }
 }
 </script>
