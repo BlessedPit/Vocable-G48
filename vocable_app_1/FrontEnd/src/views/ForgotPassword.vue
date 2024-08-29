@@ -98,7 +98,7 @@ export default {
                         const resetToken = response.data.resetToken;
                         console.log("Token di reset ricevuto:", resetToken); // Per confermare la ricezione del token
 
-                        const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/?token=${resetToken}`;
+                        const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/${resetToken}`;
                         console.log("Link di reset generato:", resetLink); // Per vedere il link di reset generato
 
                         emailjs.init("LxMUIwv2KBoQWjQDz");
