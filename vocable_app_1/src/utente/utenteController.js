@@ -49,16 +49,26 @@ var forgotPasswordControllerFn = async (req, res) => {
 
         if (status && status.status === true) {
             console.log("Token di reset generato con successo:", status.resetToken); // Log del token generato
-            res.send({ "status": true, "message": "Token di reset generato con successo. Controlla la tua email per il link di reset.", "resetToken": status.resetToken });
+            res.status(200).send({
+                "status": true,
+                "message": "Token di reset generato con successo. Controlla la tua email per il link di reset.",
+                "resetToken": status.resetToken
+            });
         } else {
             console.error("Errore durante la generazione del token di reset:", status.msg); // Log dell'errore se il token non è stato generato
-            res.send({ "status": false, "message": status.msg || "Errore: Impossibile generare il token di reset" });
+            res.status(400).send({
+                "status": false,
+                "message": status.msg || "Errore: Impossibile generare il token di reset"
+            });
         }
     } catch (err) {
         console.error("Errore nel forgotPasswordControllerFn:", err); // Log dell'errore catturato
-        res.send({ "status": false, "message": err.message || "Errore durante la generazione del token di reset" });
+        res.status(500).send({
+            "status": false,
+            "message": err.message || "Errore durante la generazione del token di reset"
+        });
     }
-}
+};
 
 
 var meUtenteControllerFn = async (req, res) => {
