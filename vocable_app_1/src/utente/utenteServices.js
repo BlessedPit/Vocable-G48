@@ -108,7 +108,6 @@ module.exports.logoutUtente = (req, res) => {
     });
 };
 
-/*
 module.exports.generateResetToken = (email) => {
     console.log("Inizio generazione token per email:", email);
     console.log("JWT: ", process.env.JWT_SECRET);
@@ -140,24 +139,4 @@ module.exports.generateResetToken = (email) => {
         });
     });
 };
-*/
 
-async function sendPasswordResetEmail(email, resetToken) {
-    const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/?token=${resetToken}`;
-
-    const templateParams = {
-        email: email,
-        message: `Clicca sul seguente link per resettare la tua password: ${resetLink}`,
-    };
-
-    try {
-        const response = await client.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID, templateParams);
-        return response;
-    } catch (error) {
-        throw new Error(`Errore durante l'invio dell'email: ${error.message}`);
-    }
-}
-
-module.exports = {
-    sendPasswordResetEmail,
-};
