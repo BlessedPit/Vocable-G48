@@ -100,8 +100,10 @@ export default {
 
                         const resetLink = `https://vocable-g48-production-a10a.up.railway.app/reset-password/${resetToken}`;
                         console.log("Link di reset generato:", resetLink); // Per vedere il link di reset generato
-                        console.log("emailuserID: ", process.env.EMAILJS_USER_ID);
-                        emailjs.init(process.env.EMAILJS_USER_ID);
+                        console.log("Process Env:", process.env);
+
+                        console.log("emailuserID: ", process.env.VUE_APP_EMAILJS_USER_ID);
+                        emailjs.init(process.env.VUE_APP_EMAILJS_USER_ID);
 
                         const templateParams = {
                             email: this.email,
@@ -109,7 +111,7 @@ export default {
                         };
 
                         console.log("Inizio invio email con emailjs"); // Per vedere quando inizia l'invio dell'email
-                        const emailResponse = await emailjs.send(process.env.EMAIL_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID, templateParams);
+                        const emailResponse = await emailjs.send(process.env.VUE_APP_EMAIL_SERVICE_ID, process.env.VUE_APP_EMAILJS_TEMPLATE_ID, templateParams);
                         //const emailResponse = await emailjs.send('default_service', 'template_o30m3uc', templateParams);
                         console.log("Risposta dall'invio email:", emailResponse); // Log della risposta da emailjs
 
