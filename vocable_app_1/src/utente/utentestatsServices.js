@@ -52,7 +52,7 @@ module.exports.findStatsByEmail = (email) => {
 module.exports.updateUtentestatsControllerFn = async (req, res) => {
     const { won, attempts } = req.body;
     try {
-        const stats = await utentestatsServices.findStatsByEmail(req.user.email);
+        const stats = await this.findStatsByEmail(req.user.email);
 
         if (!stats) {
             return res.status(404).json({ status: false, message: 'Utente non trovato' });
