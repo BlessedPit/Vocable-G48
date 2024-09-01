@@ -49,7 +49,7 @@ module.exports.findStatsByEmail = (email) => {
 
 
 
-module.exports.updateUtentestatsControllerFn = async (req, res) => {
+module.exports.updateUtentestatsDBService = async (req, res) => {
     const { won, attempts } = req.body;
     try {
         const stats = await this.findStatsByEmail(req.user.email);
