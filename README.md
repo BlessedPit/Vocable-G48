@@ -1,1 +1,1 @@
-Repository per la creazione del progetto del gruppo 48 del corso di Ingegneria del Software a.a. 2023/2024 dell'Università degli Studi di Trento.
+Versione online dell'applicazione Vocable del gruppo G-48 per il progetto IDS a.a. 2023/24
